@@ -1,0 +1,31 @@
+<div class="wrapper">
+    <%= form_with(model: todolist, local:true) do |form|%>
+    <% if todolist.errors.any? %>
+    <div id="error_explanation">
+      <h4><%= pluralize(todolist.errors.count, "error") %> found:</h4>
+      <ul>
+        <% todolist.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+    <div class="table">
+        <div class="row">
+            <div><%=form.label :Title %></div>
+            <div><%=form.text_field :title, size: 98 %></div>
+        </div>
+        <div class="row">
+            <div><%=form.label :Description %></div>
+            <div><%=form.text_area :description, cols: 100, rows: 10 %></div>
+        </div>       
+    </div>
+        <%= link_to 'Back', todo_lists_path %>&nbsp;&nbsp;&nbsp;&nbsp;
+        <% if todolist.new_record? %>
+          <%=form.submit :Add,id: "add", class: 'button'%>
+        <%else%>
+          <%=form.submit :Update,id: "add", class: 'button'%>
+        <%end%>
+   <%end%>
+</div>
+

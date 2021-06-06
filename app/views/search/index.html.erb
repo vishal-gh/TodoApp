@@ -1,0 +1,48 @@
+ <div class="wrapper">
+    <div>
+        <%= form_with url: "/search/index", local: true,method: :post do |form| %>
+        <%= form.label :keyword, "Search tags:" %>
+        <input type="input" name="keyword" id="keyword" data-role="tagsinput">
+        <%= form.submit "Search", class: 'button' %>
+        <% end %>
+    </div><br>
+    
+     <%if !@todoitems.nil?%>   
+        <span id="notice"><%= @todoitems.count.to_s + " records found" %></span>
+     <%end%>
+    <div class="table">          
+        
+        <div class="row header blue">
+            <div class="cell" style="width:30%">Todo Item</div>
+            <div class="cell" style="width:5%">Completed</div>      
+            <div class="cell" style="width:5%">Recurring</div>      
+            <div class="cell" style="width:15%">Date Completed</div>
+            <div class="cell" style="width:10%">Tags</div>            
+        </div>
+
+      <%if !@todoitems.nil?%>      
+      <% @todoitems.each do |item|%>
+
+      <div class="row">
+          
+          <%if item.completed? %>
+            <div class="cell completed" style="width:30%"><%=item.name%></div>
+          <%else%>
+            <div class="cell" style="width:30%"><%=item.name%></div>
+          <%end%>
+
+          <div class="cell" style="width:5%"><%= item.completed ? "Yes" : "No" %></div>          
+          <div class="cell" style="width:5%"><%= item.isrecurring ? "Yes" : "No" %></div>          
+          <div class="cell" style="width:15%"><%=item.datecompleted%></div>
+          <div class="cell" style="width:15%"><%= item.GetTags() %></div>       
+          
+      </div>
+
+      <%end%>  
+
+      <%end%>
+      
+    </div>
+<br><br>
+      <%= link_to 'Back', todo_lists_path %>
+</div>

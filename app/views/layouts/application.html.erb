@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Todo</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+    <script src="/packs/js/bootstrap-tagsinput.min.js"></script>
+  </head>
+
+  <body>
+    <%= yield %>
+
+ <script type="text/javascript">
+ 
+    $('#tagname').tagsinput({
+      cancelConfirmKeysOnEmpty: false
+    });
+
+     $('#keyword').tagsinput({
+      cancelConfirmKeysOnEmpty: false
+    });
+
+ </script>
+
+  </body>
+</html>

@@ -1,0 +1,25 @@
+ <%= form_with(model: [:edit_new, @todo_list, todoitem], local:true) do |form|%>
+
+    <div class="table">
+        <div class="row"><b>Add ToDo:</b></div>
+        <div class="row">
+            <br>
+            <div><%=form.label :Name %></div>
+            <div><%=form.text_field :name, size: 40 %></div>
+            <br>
+            <div><%=form.label :Tags %></div>                       
+            <input type="input" value="<%=todoitem.GetTags%>" name="tagname" id="tagname" data-role="tagsinput"><br>
+            <br>
+            <div><%=form.check_box  :isrecurring%>Recurring</div>
+            <br><br>
+            <%= link_to 'Back', todo_list_todo_items_path(@todo_list) %>&nbsp;&nbsp;&nbsp;&nbsp;
+            <%=form.submit :Update, class: 'button'%>
+        </div>            
+    </div>
+
+<%end%>        
+
+
+    
+
+

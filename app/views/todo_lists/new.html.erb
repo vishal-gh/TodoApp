@@ -1,0 +1,9 @@
+<div class="wrapper" style="padding-bottom: 0px;">
+    <%if @todolist.new_record? %>
+        <div class="fontblue"><h1>New Todo List</h1></div>
+    <%else%>
+        <div class="fontblue"><h1>Edit Todo Lists</h1></div>
+    <%end%>
+</div>
+
+<%= render 'form', todolist: @todolist%>

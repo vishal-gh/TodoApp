@@ -1,0 +1,37 @@
+
+
+<div class="wrapper">
+  <div class="fontblue"><h1>Todo Lists</h1></div>
+    <br>    
+    <p id="notice"><%= flash[:topnotice] %></p>  
+    <br>
+    <div class="table">    
+    
+      <div class="row header blue">
+        <div class="cell" style="width:25%">List Name</div>
+        <div class="cell" style="width:25%">Description</div>      
+        <div class="cell" style="width:25%">Todo Items</div>
+        <div class="cell" style="width:8%">Edit</div>
+        <div class="cell" style="width:9%">Manage Todo Items</div>
+        <div class="cell" style="width:8%">Delete</div>
+      </div>
+      <% @todolists.each do |list|%>
+
+      <div class="row">
+          <div class="cell" style="width:25%"><%=list.title%></div>
+          <div class="cell" style="width:25%"><%=list.description%></div>
+          <div class="cell" style="width:25%"><%= sanitize list.GetItems%></div>
+          <div class="cell" style="width:8%"><%=link_to "Edit", edit_todo_list_path(list)%></div>
+          <div class="cell" style="width:9%"><%=link_to "Manage", todo_list_todo_items_path(list)%></div>        
+          <div class="cell" style="width:8%"><%=link_to "Delete", todo_list_path(list), method: :delete, data: {confirm: "are you sure?"}%></div>
+      </div>
+
+      <%end%>           
+
+    </div>
+
+  <h3><%= link_to 'Add New Todo List', new_todo_list_path, id: "addnew" %></h3>
+  <%= button_to "Search To Dos Items", search_index_path, class: 'button', method: :get %>
+</div>
+
+</div>
