@@ -7,8 +7,7 @@ Given('I need to goto the homepage') do
   visit 'http://localhost:3000/'
 end
 
-When('I am on the homepage') do
-  
+When('I am on the homepage') do  
 end
 
 Then('I should see {string}') do |string|
