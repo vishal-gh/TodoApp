@@ -6,7 +6,7 @@ Given I need to goto the homepage
 When I am on the homepage
 Then I should see "Todo Lists"
 
-Scenario: Add new user
+Scenario: Add new list
 
 Given I am on the homepage
 Then I will click Add New Todo List link
