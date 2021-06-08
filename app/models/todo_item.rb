@@ -36,7 +36,6 @@ class TodoItem < ApplicationRecord
           ''
       end
 
-
    end
    
 end

@@ -1,3 +1,4 @@
+
 require 'date'
 
 class TodoItemsController < ApplicationController
@@ -20,7 +21,7 @@ class TodoItemsController < ApplicationController
    
             if @todoitem.update(todo_items_params_edit[:todo_item])
 
-                @todoitem.SaveTags(todo_items_params_edit)    
+                TodoItemManager.SaveTags(@todoitem, todo_items_params_edit)    
                 flash[:topnotice] = 'Todo item updated successully.'
                 redirect_to todo_list_todo_items_path(@todo_list)
                 
@@ -42,7 +43,7 @@ class TodoItemsController < ApplicationController
            
             if @todo_item.id > 0
 
-                @todo_item.SaveTags(params.permit(:tagname))
+                TodoItemManager.SaveTags(@todo_item, params.permit(:tagname))
                 
             else
 
