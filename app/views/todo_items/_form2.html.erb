@@ -1,7 +1,18 @@
- <%= form_with(model: [:edit_new, @todo_list, todoitem], local:true) do |form|%>
-
+ <%= form_with(model: [:edit, @todo_list, todoitem], local:true) do |form|%>
     <div class="table">
         <div class="row"><b>Add ToDo:</b></div>
+
+        <% if todoitem.errors.any? %>
+        <div id="error_explanation">
+        <h4><%= pluralize(todoitem.errors.count, "error") %> found:</h4>
+        <ul>
+            <% todoitem.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+            <% end %>
+        </ul>
+        </div>
+        <% end %>
+
         <div class="row">
             <br>
             <div><%=form.label :Name %></div>

@@ -7,7 +7,7 @@
         <% end %>
     </div><br>
     
-     <%if !@todoitems.nil?%>   
+     <%unless @todoitems.nil?%>   
         <span id="notice"><%= @todoitems.count.to_s + " records found" %></span>
      <%end%>
     <div class="table">          
@@ -20,7 +20,7 @@
             <div class="cell" style="width:10%">Tags</div>            
         </div>
 
-      <%if !@todoitems.nil?%>      
+      <%unless @todoitems.nil?%>      
       <% @todoitems.each do |item|%>
 
       <div class="row">

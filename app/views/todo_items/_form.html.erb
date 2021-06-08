@@ -1,7 +1,14 @@
- <%= form_with(model: todoitem, local:true) do |form|%>
+ <%= form_with(model: todoitem, local:true) do |form|%>    
 
     <div class="table">
         <div class="row"><b>Add New ToDo:</b></div>
+        <% unless flash[:errors].nil? %>
+            <div id="error_explanation">
+            <ul>        
+                <li><%= flash[:errors] %></li>
+            </ul>
+            </div>
+        <%end%>        
         <div class="row">
             <div><%=form.label :Name %></div>
             <div><%=form.text_field :name, size: 40 %></div>

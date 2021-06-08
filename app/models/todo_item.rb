@@ -5,41 +5,35 @@ class TodoItem < ApplicationRecord
 
    def SaveTags(params)
 
+      unless self.new_record?
+
+         tags.destroy_all
+
+      end
+
       tagnames = params[:tagname].split(",")
 
-      tagnames.each do |x|
-
-            newhash = Hash.new
-            newhash[:tagname] = x
-            tags.create(newhash)
+      tagnames.each do |tag|
+            
+            tags.create!(tagname: tag)
         
       end
 
    end
    
-   def DeleteTags
-
-      tags.each do |x|
-
-         x.destroy
-
-      end
-      
-   end
-
+  
    def GetTags
-
       
-      tagnames = ""
+      tagnames = ''
 
-      tags.each do |x|
-         tagnames << x.tagname + ", "  
+      tags.each do |tag|
+         tagnames << tag.tagname + ', '
       end
 
       if tagnames.length > 0
-         tagnames.delete_suffix(", ")
+         tagnames.delete_suffix(', ')
       else
-          ""
+          ''
       end
 
 

@@ -1,7 +1,7 @@
 
 
 <div class="wrapper">
-  <div class="fontblue"><h1>Todo Items</h1></div>
+  <div class="fontblue"><h1>Todo Items</h1></div>    
     <p id="notice"><%= flash[:topnotice] %></p>  
     <br>
     <div class="table">    
@@ -32,7 +32,7 @@
           <div class="cell" style="width:15%"><%=item.datecompleted%></div>
           <div class="cell" style="width:15%"><%= item.GetTags() %></div>
        
-          <%if !item.completed? %>
+          <%unless item.completed? %>
             <div class="cell" style="width:10%"><%=link_to "Complete", complete_todo_list_todo_item_path(@todo_list,item), method: :complete %></div>
           <%else%>
             <div class="cell" style="width:10%"><%=link_to "Incomplete", incomplete_todo_list_todo_item_path(@todo_list,item), method: :complete %></div>
@@ -42,7 +42,7 @@
           
             <%= form_tag move_todo_list_todo_item_path(@todo_list, item), :method => :post do %>
 
-              <%=select_tag "newtodo",options_from_collection_for_select(TodoList.all.where("id <> " + @todo_list.id.to_s),"id","title",@todo_list.id),{onchange: "this.form.submit();", include_blank: "Select"}%>
+              <%=select_tag "newtodo",options_from_collection_for_select(TodoList.includes(:todo_items).all.where("id <> " + @todo_list.id.to_s),"id","title",@todo_list.id),{onchange: "this.form.submit();", include_blank: "Select"}%>
             
             <%end%>
             

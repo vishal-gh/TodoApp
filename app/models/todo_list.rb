@@ -7,14 +7,14 @@ class TodoList < ApplicationRecord
 
     def GetItems
 
-        items = ""
+        items = ''
 
-        todo_items.each do |x|
-            items << x.name + "<br>"  
+        todo_items.each do |item|
+            items << item.name + '<br>'
         end
 
         if items.length > 0
-            items.delete_suffix(", ")
+            items.delete_suffix(', ')
         else
             ""
         end

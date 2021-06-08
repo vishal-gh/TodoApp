@@ -8,7 +8,7 @@ Rails.application.routes.draw do
         post :incomplete
         post :move
         get  :search
-        patch :edit_new
+        patch :edit
       end
     end
   end
