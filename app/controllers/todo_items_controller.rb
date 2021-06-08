@@ -9,7 +9,8 @@ class TodoItemsController < ApplicationController
 
     def index
         
-        @todoitems = @todo_list.todo_items.all
+        @dropdown_items = TodoList.all.where("id <> " + @todo_list.id.to_s)        
+        @todoitems = @todo_list.todo_items.all.includes(:tags)
 
     end
 

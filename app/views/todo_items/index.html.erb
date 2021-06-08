@@ -42,7 +42,7 @@
           
             <%= form_tag move_todo_list_todo_item_path(@todo_list, item), :method => :post do %>
 
-              <%=select_tag "newtodo",options_from_collection_for_select(TodoList.includes(:todo_items).all.where("id <> " + @todo_list.id.to_s),"id","title",@todo_list.id),{onchange: "this.form.submit();", include_blank: "Select"}%>
+              <%=select_tag "newtodo",options_from_collection_for_select(@dropdown_items,"id","title",@todo_list.id),{onchange: "this.form.submit();", include_blank: "Select"}%>
             
             <%end%>
             
