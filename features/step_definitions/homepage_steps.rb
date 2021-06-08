@@ -4,10 +4,10 @@ first_random = SecureRandom.hex.to_s
 second_random = SecureRandom.hex.to_s
 
 Given('I need to goto the homepage') do
-  visit 'http://localhost:3000/'
 end
 
 When('I am on the homepage') do  
+  visit 'http://localhost:3000/'
 end
 
 Then('I should see {string}') do |string|
