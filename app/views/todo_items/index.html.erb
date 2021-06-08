@@ -40,7 +40,7 @@
           
           <div class="cell" style="width:20%">
           
-            <%= form_tag move_todo_list_todo_item_path(@todo_list, item), :method => :post do %>
+            <%= form_tag move_todo_list_todo_item_path(@todo_list, item), method: :post do %>
 
               <%=select_tag "newtodo",options_from_collection_for_select(@dropdown_items,"id","title",@todo_list.id),{onchange: "this.form.submit();", include_blank: "Select"}%>
             

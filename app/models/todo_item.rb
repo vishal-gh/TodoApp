@@ -7,7 +7,7 @@ class TodoItem < ApplicationRecord
 
       unless self.new_record?
 
-         tags.destroyd_all
+         tags.destroy_all
 
       end
 

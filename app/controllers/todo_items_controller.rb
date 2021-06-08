@@ -115,7 +115,7 @@ class TodoItemsController < ApplicationController
 
     def todo_items_params_edit
         
-        params.permit(:tagname, :todo_item => {})
+        params.permit(:tagname, todo_item: {})
 
     end    
 
