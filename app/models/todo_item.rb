@@ -11,7 +11,7 @@ class TodoItem < ApplicationRecord
 
       end
 
-      tagnames = params[:tagname].split(",")
+      tagnames = params[:tagname].split(',')
 
       tagnames.each do |tag|
             
