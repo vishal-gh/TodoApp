@@ -4,21 +4,4 @@ class TodoList < ApplicationRecord
     has_many :todo_items
     has_many :tags, through: :todo_items
 
-
-    def GetItems
-
-        items = ''
-
-        todo_items.each do |item|
-            items << item.name + '<br>'
-        end
-
-        if items.length > 0
-            items.delete_suffix(', ')
-        else
-            ""
-        end
-
-    end
-
 end

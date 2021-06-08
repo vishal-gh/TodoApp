@@ -30,7 +30,7 @@
           <div class="cell" style="width:5%"><%= item.completed ? "Yes" : "No" %></div>          
           <div class="cell" style="width:5%"><%= item.isrecurring ? "Yes" : "No" %></div>          
           <div class="cell" style="width:15%"><%=item.datecompleted%></div>
-          <div class="cell" style="width:15%"><%= item.GetTags() %></div>
+          <div class="cell" style="width:15%"><%= TodoItemsHelper.GetTags(item) %></div>
        
           <%unless item.completed? %>
             <div class="cell" style="width:10%"><%=link_to "Complete", complete_todo_list_todo_item_path(@todo_list,item), method: :complete %></div>

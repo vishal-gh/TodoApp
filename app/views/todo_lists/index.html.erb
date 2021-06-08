@@ -20,7 +20,7 @@
       <div class="row">
           <div class="cell" style="width:25%"><%=list.title%></div>
           <div class="cell" style="width:25%"><%=list.description%></div>
-          <div class="cell" style="width:25%"><%= sanitize list.GetItems%></div>
+          <div class="cell" style="width:25%"><%= sanitize TodoListsHelper.GetItems(list)%></div>
           <div class="cell" style="width:8%"><%=link_to "Edit", edit_todo_list_path(list)%></div>
           <div class="cell" style="width:9%"><%=link_to "Manage", todo_list_todo_items_path(list)%></div>        
           <div class="cell" style="width:8%"><%=link_to "Delete", todo_list_path(list), method: :delete, data: {confirm: "are you sure?"}%></div>
