@@ -3,7 +3,7 @@ class TodoListsController < ApplicationController
     
     def index
         
-        @todolists = TodoList.all.includes(:todo_items).order(:id => :asc)
+        @todolists = TodoList.all.includes(:todo_items).order(id: :asc)
 
     end
 
