@@ -1,9 +1,14 @@
 
+
 require 'date'
+
+module Api::V1
 
 class TodoItemsController < ApplicationController
     before_action :set_todo_list
     before_action :set_todo_item, except: [:index, :create]
+    skip_before_action :verify_authenticity_token
+
    
     def show
     end
@@ -12,6 +17,23 @@ class TodoItemsController < ApplicationController
         
         @dropdown_items = TodoList.all.where("id <> " + @todo_list.id.to_s)        
         @todoitems = @todo_list.todo_items.all.includes(:tags)
+
+         returnlist = []
+
+        @todoitems.each do |item|
+           list = {
+               id: item.id,
+               name: item.name,
+               completed: item.completed == true ? 'Yes' : 'No' ,
+               datecompleted: item.datecompleted,
+               isrecurring: item.isrecurring == true ? 'Yes' : 'No',
+               tags: item.tags
+           }
+           returnlist << list
+        end       
+
+
+        render json:returnlist
 
     end
 
@@ -45,18 +67,23 @@ class TodoItemsController < ApplicationController
 
                 TodoItemManager.SaveTags(@todo_item, params.permit(:tagname))
                 
+                render json: {message: 'Successfully created'}, status: :ok
+
             else
 
-                flash[:errors] = "Unknown error occured"
+                render json: {message: 'Could not be saved'}, status: :unprocessable_entity
+                #flash[:errors] = "Unknown error occured"
 
             end
 
-            redirect_to todo_list_todo_items_path(@todo_list)
+            #redirect_to todo_list_todo_items_path(@todo_list)
             
         else
             
-            flash[:errors] = "Name can't be blank"
-            redirect_to todo_list_todo_items_path(@todo_list)
+            render json: {message: 'Could not be saved'}, status: :unprocessable_entity
+
+            #flash[:errors] = "Name can't be blank"
+            #redirect_to todo_list_todo_items_path(@todo_list)
 
         end
 
@@ -65,32 +92,36 @@ class TodoItemsController < ApplicationController
     def destroy
         
         @todoitem.destroy
-        flash[:topnotice] = 'Item deleted successully.'
-        redirect_to todo_list_todo_items_path(@todo_list)
+        render json: {message: 'Successfully deleted'}, status: :ok
+        #flash[:topnotice] = 'Item deleted successully.'
+        #redirect_to todo_list_todo_items_path(@todo_list)
 
     end
 
     def move
         
         @todoitem.update(todo_list_id: params[:newtodo])
-        flash[:topnotice] = 'Item moved successully.'
-        redirect_to todo_list_todo_items_path(@todo_list)
+        render json: {message: 'Successfully moved'}, status: :ok
+        #flash[:topnotice] = 'Item moved successully.'
+        #redirect_to todo_list_todo_items_path(@todo_list)
 
     end
 
     def complete
         
         @todoitem.update(completed: true, datecompleted: DateTime.now)
-        flash[:topnotice] = 'Marked as completed successully.'
-        redirect_to todo_list_todo_items_path(@todo_list)
+        render json: {message: 'Status changed'}, status: :ok
+        #flash[:topnotice] = 'Marked as completed successully.'
+        #redirect_to todo_list_todo_items_path(@todo_list)
 
     end
 
     def incomplete
         
         @todoitem.update(completed: false, datecompleted: nil)
-        flash[:topnotice] = 'Marked as incomplete successully.'
-        redirect_to todo_list_todo_items_path(@todo_list)
+        render json: {message: 'Status changed'}, status: :ok
+        #flash[:topnotice] = 'Marked as incomplete successully.'
+        #redirect_to todo_list_todo_items_path(@todo_list)
 
     end
     
@@ -120,5 +151,7 @@ class TodoItemsController < ApplicationController
 
     end    
 
+
+end
 
 end

@@ -1,9 +1,26 @@
-class TodoListsController < ApplicationController
+module Api::V1
+
+class TodoListsController < ApplicationController    
     before_action :set_todo_list, only: %i[ show edit update destroy ]
-    
+    skip_before_action :verify_authenticity_token
+        
     def index
         
         @todolists = TodoList.all.includes(:todo_items).order(id: :asc)
+
+        returnlist = []
+
+        @todolists.each do |item|
+           list = {
+               id: item.id,
+               title: item.title,
+               description: item.description,
+               todo_items: item.todo_items
+           }
+           returnlist << list
+        end       
+
+        render json: returnlist
 
     end
 
@@ -23,20 +40,18 @@ class TodoListsController < ApplicationController
         
         @todolist = TodoList.new(todolist_params)
 
-        respond_to do |format|
+        if @todolist.save
+            
+            #flash[:topnotice] = 'New todo list has been created successfully.'                
+            #format.html { redirect_to todo_lists_path }
+            render json: {message: 'Successfully created'}, status: :ok
 
-            if @todolist.save
-                
-                flash[:topnotice] = 'New todo list has been created successfully.'                
-                format.html { redirect_to todo_lists_path }
+        else
+            
+            render json: @todolist.errors, status: :unprocessable_entity
+            #format.html { render :new}
 
-            else
-                
-                format.html { render :new}
-
-            end
-
-        end
+        end      
 
     end
 
@@ -63,15 +78,17 @@ class TodoListsController < ApplicationController
         
         if @todolist.destroy            
             
-            flash[:topnotice] = 'The todo list has been deleted.'
+            render json: {message: 'Successfully deleted'}, status: :ok
+            #flash[:topnotice] = 'The todo list has been deleted.'
 
         else
             
-            flash[:topnotice] = 'Delete failed'
+            render json: @list.errors, status: :unprocessable_entity
+            #flash[:topnotice] = 'Delete failed'
 
         end
 
-        redirect_to todo_lists_path
+        #redirect_to todo_lists_path
 
     end
 
@@ -98,5 +115,7 @@ class TodoListsController < ApplicationController
         end      
         
     end
+
+end
 
 end
