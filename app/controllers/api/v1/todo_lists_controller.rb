@@ -57,20 +57,23 @@ class TodoListsController < ApplicationController
 
     def update
 
-        respond_to do |format|
+        #respond_to do |format|
 
             if @todolist.update(todolist_params)
 
-                flash[:topnotice] = 'The todo list has been updated.'
-                format.html { redirect_to todo_lists_path }
+                render json: {message: 'Successfully updated'}, status: :ok
+                #flash[:topnotice] = 'The todo list has been updated.'
+                #format.html { redirect_to todo_lists_path }
 
             else
                 
-                format.html { render :new}
+                #format.html { render :new}
+                render json: @todolist.errors, status: :unprocessable_entity
+
 
             end
             
-        end
+        #end
 
     end
    
